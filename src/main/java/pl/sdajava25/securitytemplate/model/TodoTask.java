@@ -1,13 +1,13 @@
-package pl.sdajava25.security_template.model;
+package pl.sdajava25.securitytemplate.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import pl.sdajava25.securitytemplate.model.status.Status;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -20,6 +20,15 @@ public class TodoTask {
 
     private String name;
 
-    private
+    private String content;
+
+    @CreationTimestamp
+    private LocalDate dateAdd;
+
+    private LocalDate dateFinished;
+    private TaskStatus status;
+
+    @ManyToOne
+    private Account account;
 
 }

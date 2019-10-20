@@ -2,29 +2,32 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Login form</title>
+    <title>Task form</title>
     <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
 </head>
 <body>
 <th:block th:replace="fragments :: navigator" th:remove="tag"/>
 <div class="container">
-    <h1>Login form</h1>
-    <form th:action="@{/login}" method="post">
+    <h1>Task form</h1>
+    <form th:action="@{/task/add}" method="post" th:object="${taskobject}">
         <div class="row col-12 form-container">
+            <div th:if="${errorMessage != null}" class="row col-md-12 form-input-row">
+                <div class="col-md-12 alert alert-danger" th:text="${errorMessage}"></div>
+            </div>
             <div class="row col-md-12 form-input-row">
                 <div class="col-md-6">
-                    <label for="username">Username:</label>
+                    <label for="name">Name:</label>
                 </div>
                 <div class="col-md-6">
-                    <input class="form-control" type="text" id="username" th:name="username">
+                    <input class="form-control" type="text" id="name" th:field="*{name}">
                 </div>
             </div>
             <div class="row col-md-12 form-input-row">
                 <div class="col-md-6">
-                    <label for="password">Password:</label>
+                    <label for="content">Content:</label>
                 </div>
                 <div class="col-md-6">
-                    <input class="form-control" type="password" id="password" th:name="password">
+                    <input class="form-control" type="text" id="content" th:field="*{content}">
                 </div>
             </div>
             <div class="row col-md-12 form-button-row">

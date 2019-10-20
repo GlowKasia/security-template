@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task list</title>
+    <th:block th:replace="fragments :: link-styles" th:remove="tag"/>
+</head>
+<body>
+<th:block th:replace="fragments :: navigator" th:remove="tag"/>
+<div class="container">
+    <h1>Task list</h1>
+    <div class="row col-md-12">
+        <div class="row col-md-12 list-header-row">
+            <div class="col-1">Id</div>
+            <div class="col-1">Name</div>
+            <div class="col-2">Date added</div>
+            <div class="col-2">Content</div>
+            <div class="col-2">Status</div>
+            <div class="col-2">Date finished</div>
+            <div class="col-2"><!--Buttons--></div>
+        </div>
+        <div th:each="task : ${tasks}" class="row col-md-12 list-data-row">
+            <div class="col-1" th:text="${task.getId()}"></div>
+            <div class="col-1" th:text="${task.getName()}"></div>
+            <div class="col-2" th:text="${task.getDateAdded()}"></div>
+            <div class="col-2" th:text="${task.getContent()}"></div>
+            <div class="col-2" th:text="${task.getStatus()}"></div>
+            <div class="col-2" th:text="${task.getDateFinished()}"></div>
+            <div class="row col-2">
+                <div class="col-6" th:if="${task.getStatus().name() == 'TODO'}">
+                    <a th:href="@{'/task/done/' + ${task.getId()}}">
+                        <button type="button" class="btn btn-primary">Done
+                        </button>
+                    </a>
+                </div>
+                <div class="col-6" th:if="${task.getStatus().name() == 'DONE'}">
+                    <a th:href="@{'/task/archive/' + ${task.getId()}}">
+                        <button type="button" class="btn btn-primary">Archive
+                        </button>
+                    </a>
+                </div>
+                <div class="col-6" th:if="${task.getStatus().name() == 'DONE'}">
+                    <a th:href="@{'/task/todo/' + ${task.getId()}}">
+                        <button type="button" class="btn btn-primary">To do
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="fragments :: footer" th:remove="tag"/>
+<th:block th:replace="fragments :: scripts" th:remove="tag"/>
+</body>
+</html>

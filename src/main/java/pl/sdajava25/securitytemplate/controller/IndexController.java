@@ -15,6 +15,11 @@ public class IndexController {
         return "index";
     }
 
+    @GetMapping("/tylkodlakozakow")
+    public String kozaki(){
+        return "index";
+    }
+
     @GetMapping("/login")
     public String loginForm(){
         return "login-form";
